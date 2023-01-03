@@ -1,0 +1,31 @@
+class Solution {
+private:
+void helper(int k, int total, int sum, int ind, vector<vector<int>> &res, vector<int>&combi){
+//    base conditions
+    if(sum== total and k==0)
+     {
+         res.push_back(combi);
+         return;
+    }
+    if(sum>total or ind>9) return ;
+
+// we have two choices, either to pick the current element or leave the current element
+// to pick the element
+        sum= sum+ind;
+        combi.push_back(ind);
+        helper(k-1, total, sum, ind+1, res, combi);
+        sum= sum-ind;        //backtrack
+        combi.pop_back();           
+// to not pick the element
+        helper(k, total, sum, ind+1, res, combi);
+
+}
+public:
+    vector<vector<int>> combinationSum3(int k, int total) {
+        vector<vector<int>> res;
+        vector<int> combi;
+        int sum=0, ind=1;
+        helper(k, total, sum, ind, res, combi);
+        return res;
+    }
+};

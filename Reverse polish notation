@@ -1,0 +1,20 @@
+#include<bits/stdc++.h>
+static unordered_set<string> operators({"+", "-", "*", "/"});
+class Solution {
+public:
+    long evalRPN(vector<string>& tokens) {
+        stack<long> stack;
+        for (auto t : tokens) {
+            if (operators.find(t) == operators.end()) stack.push(stoi(t));
+            else {
+                long b = stack.top(); stack.pop();
+                long a = stack.top(); stack.pop();
+                if (t == "+") stack.push(a + b);
+                else if (t == "-") stack.push(a - b);
+                else if (t == "*") stack.push(a * b);
+                else stack.push(a / b);
+            }
+        }
+        return stack.top();
+    }
+};

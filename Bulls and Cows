@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        vector<int> freq(10, 0); // stores the frequency
+        if(secret.size() != guess.size()) return "0A0B";
+        int n= secret.size();
+        int bull=0;
+        int cow=0;
+        for(auto i=0; i<secret.size(); i++){
+            if(secret[i]==guess[i]) bull++; //common positions are bulls 
+            else freq[secret[i]-'0']++;     // else store the frequency of non-common indexed values
+        }
+        for(int i=0; i<n; i++){
+                if(guess[i] != secret[i] and freq[guess[i]-'0']>0){  // if the common-indexed values are not same but, guess[index] has some value in frequency, then that is cow, 
+                    cow++;
+                    freq[guess[i]-'0']--; //also decrease the frequency of cow element afterwards
+                }
+        }
+        return to_string(bull) + 'A' + to_string(cow) + "B";
+        
+        
+    }
+};

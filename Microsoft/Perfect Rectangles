@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isRectangleCover(vector<vector<int>>& rec) {
+        map<pair<int,int>, int> naksha;
+        for(auto it :rec){
+            //making the right-to-left diagonal values +1 and left-to-right values -1
+            naksha[{it[0], it[1]}]++;
+            naksha[{it[2], it[3]}]++;
+            naksha[{it[0], it[3]}]--;
+            naksha[{it[2], it[1]}]--;
+        }
+
+        int kona=0;
+        for(auto i=naksha.begin(); i!=naksha.end(); i++){
+            if(i->second!=0){
+                if(abs(i->second)!=1) return false;
+                kona++;
+            }
+        }
+        return kona==4?true:false;
+    }
+};

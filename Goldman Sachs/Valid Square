@@ -1,0 +1,27 @@
+class Solution {
+private:
+int helper(vector<int> &a, vector<int> &b){
+    // we'll return the square of distace,as if the distances of the size are equal, then the square of them will also be equal
+    return ((a[0]-b[0])*(a[0]-b[0]) + ((a[1]-b[1])*(a[1]-b[1]))) ;
+}
+public:
+    bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
+// for a valid square: 1) all four sides are of equal length
+                // 2) all angles b/w ajacent lines are 90deg each
+
+// we'll just calculate the 6 distances of the figure
+if(p1==p2 or p2==p3 or p3==p4 or p1==p4 or p1==p3 or p2==p4) return false; 
+vector<int> dis={
+helper(p1,p2),helper(p1,p3),helper(p1,p4),helper(p2,p3),helper(p2,p4),helper(p3,p4),
+};
+// map to store the frequency of the distances
+// if 4 frequencies of a distance and 2 frequencies of another distances are found in a map, then, the given points represent the perfect square
+unordered_map<int, int> naksha;
+
+for(auto it: dis){
+naksha[it]++;
+}
+return naksha.size()==2;
+
+    }
+};

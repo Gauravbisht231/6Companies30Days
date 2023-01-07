@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int trailingZeroes(int n) {
+      // observations: for any factorial, there exist more or equal 2s than 5s
+      // so the dominating factor to make a trailing zero will depend on 5s
+    
+
+    // calculating 5s
+    int total5=0;
+    while(n>0){
+        total5+= n/5;  // number of 5 factors within the 'n' range of numbers
+        n= n/5;
+
+
+    }
+    return total5;
+    }
+};

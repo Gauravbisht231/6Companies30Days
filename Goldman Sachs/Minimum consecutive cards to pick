@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int minimumCardPickup(vector<int>& cards) {
+        int res= INT_MAX;
+        int n= size(cards);
+        unordered_map<int, int> naksha; //we store the indices with their last index occurences
+        for(auto it=0; it<n; it++){
+         if(naksha.count(cards[it])){ // if there exist any element that is previously seen at some index, 
+             res= min(res, it-naksha[cards[it]]+1); // we calculate the distance b/w the current and the previous stored index
+         }   
+         naksha[cards[it]]=it; // else, if the element is fresh, then we store the index, to the value of the map
+        }
+        return res==INT_MAX?-1:res;
+    }
+};
